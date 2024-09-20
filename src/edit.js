@@ -32,14 +32,13 @@ import './editor.scss';
  */
 
 import { PanelBody, TextControl, Button, SearchControl, PanelRow, ComboboxControl } from '@wordpress/components';
-import { react, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import apiFetch from '@wordpress/api-fetch';
 
 
 export default function Edit({ attributes, setAttributes }) {
 
-	const { searchTerm, resortFind, selectedOption } = attributes;
-	const [mySuggession, setMySuggestions] = useState([]);
+	const { resortFind, selectedOption } = attributes;	
 	const [loading, setLoading] = useState(false);
 
 	//For ComboBoxControl: Autocomplete - search
@@ -68,6 +67,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 	
 	//For TextControl: Search on Panel Row
+	const [mySuggession, setMySuggestions] = useState([]);
 	const fetchResortData = () => {
 		setLoading(true);
 		apiFetch({ path: `/fnugg/v1/search?q=${resortFind}` })
@@ -79,8 +79,6 @@ export default function Edit({ attributes, setAttributes }) {
 				setLoading(false);
 			});
 	};
-
-
 	useEffect(() => {
 		if (resortFind && resortFind.length > 0) {
 			fetchResortData()
@@ -90,7 +88,6 @@ export default function Edit({ attributes, setAttributes }) {
 	
 	return (
 		<>
-
 			<p {...useBlockProps()}>
 
 				<InspectorControls>

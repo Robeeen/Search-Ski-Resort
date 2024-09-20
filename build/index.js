@@ -67,11 +67,9 @@ function Edit({
   setAttributes
 }) {
   const {
-    searchTerm,
     resortFind,
     selectedOption
   } = attributes;
-  const [mySuggession, setMySuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(false);
 
   //For ComboBoxControl: Autocomplete - search
@@ -96,6 +94,7 @@ function Edit({
   }, [search]);
 
   //For TextControl: Search on Panel Row
+  const [mySuggession, setMySuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
   const fetchResortData = () => {
     setLoading(true);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
