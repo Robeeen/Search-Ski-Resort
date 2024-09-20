@@ -74,11 +74,11 @@ function Edit({
   const [mySuggession, setMySuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(false);
 
-  //For ComboBoxControl:
+  //For ComboBoxControl: Autocomplete - search
   const [options, setOptions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
   const [search, setSearch] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)('');
   (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
-    if (search.length > 1) {
+    if (search.length >= 2) {
       _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
         path: `/fnugg/v1/autocomplete?q=${search}`
       }).then(response => {
@@ -95,18 +95,7 @@ function Edit({
     }
   }, [search]);
 
-  // const autoCoplete = () => {		
-  // 	setLoading(true);
-  // 	apiFetch({ path: `/fnugg/v1/autocomplete?q=${searchTerm}` })
-  // 		.then((results) => {
-  // 			JSON.stringify(setMySuggestions(results));
-  // 			setLoading(false);
-  // 		})
-  // 		.catch(() => {
-  // 			setLoading(false);
-  // 		});
-  // };
-
+  //For TextControl: Search on Panel Row
   const fetchResortData = () => {
     setLoading(true);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
@@ -118,49 +107,17 @@ function Edit({
       setLoading(false);
     });
   };
-
-  // useEffect(() => { 
-  // 	//This && is truely learning curve//Wihout it, 
-  // 	//error shows length is typing error because no data in searchTerm.
-  // 	if (searchTerm && searchTerm.length > 1) {
-  // 		autoCoplete();
-  // 	}
-  // }, [searchTerm]);
-
   (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
     if (resortFind && resortFind.length > 0) {
       fetchResortData();
     }
   }, [resortFind]);
   const myData = JSON.stringify(mySuggession.result);
-
-  //console.log(myOptions);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
       ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-          title: "AutoComplete Ski Resort",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('AutoComplete Ski Resort'),
-            value: searchTerm,
-            onChange: value => setAttributes({
-              searchTerm: value
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              style: {
-                "height": "auto",
-                "width": "100%",
-                "backgroundColor": "#c2c2c2",
-                padding: "5px"
-              },
-              children: [myData ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-                children: myData.replace(/[\[\]{}"\/]/g, '')
-              }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), JSON.stringify(mySuggession.total)]
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
           title: "Search Ski Resort",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Ski Resort'),
@@ -181,20 +138,9 @@ function Edit({
               }) : ''
             })
           })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        style: {
-          "color": "black",
-          "height": "auto",
-          "width": "100%",
-          "backgroundColor": "#c2c2c2",
-          paddingLeft: "5px"
-        },
-        children: myData ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
-          children: [myData.replace(/[\[\]{}"\/]/g, ''), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {})]
-        }) : ''
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
-        label: "Search Resort final:",
+        label: "Type here to autocomplete Ski-Resort:",
         value: selectedOption
         // options={ options.map((item) => ({
         // 	value: item.site_path,   // Use `site_path` as the value
@@ -211,12 +157,6 @@ function Edit({
         onFilterValueChange: inputValue => {
           setSearch(inputValue); // Update search term when user types
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        children: options.map((item, index) => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("li", {
-            children: [item.name, " - ", item.site_path]
-          }, index);
-        })
       })]
     })
   });
@@ -372,7 +312,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

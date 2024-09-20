@@ -42,12 +42,12 @@ export default function Edit({ attributes, setAttributes }) {
 	const [mySuggession, setMySuggestions] = useState([]);
 	const [loading, setLoading] = useState(false);
 
-	//For ComboBoxControl:
+	//For ComboBoxControl: Autocomplete - search
 	const [ options, setOptions ] = useState([]);
 	const [ search, setSearch ] = useState('');
 
 	useEffect(() => {
-		if(search.length > 1){
+		if(search.length >= 2){
 			apiFetch({ path: `/fnugg/v1/autocomplete?q=${search}` })
 			.then((response) => {
 				console.log('Api Response on search', response.result);
@@ -66,18 +66,8 @@ export default function Edit({ attributes, setAttributes }) {
 		}
 	}, [search]);
 
-	// const autoCoplete = () => {		
-	// 	setLoading(true);
-	// 	apiFetch({ path: `/fnugg/v1/autocomplete?q=${searchTerm}` })
-	// 		.then((results) => {
-	// 			JSON.stringify(setMySuggestions(results));
-	// 			setLoading(false);
-	// 		})
-	// 		.catch(() => {
-	// 			setLoading(false);
-	// 		});
-	// };
-
+	
+	//For TextControl: Search on Panel Row
 	const fetchResortData = () => {
 		setLoading(true);
 		apiFetch({ path: `/fnugg/v1/search?q=${resortFind}` })
@@ -90,13 +80,6 @@ export default function Edit({ attributes, setAttributes }) {
 			});
 	};
 
-	// useEffect(() => { 
-	// 	//This && is truely learning curve//Wihout it, 
-	// 	//error shows length is typing error because no data in searchTerm.
-	// 	if (searchTerm && searchTerm.length > 1) {
-	// 		autoCoplete();
-	// 	}
-	// }, [searchTerm]);
 
 	useEffect(() => {
 		if (resortFind && resortFind.length > 0) {
@@ -105,39 +88,15 @@ export default function Edit({ attributes, setAttributes }) {
 	}, [resortFind]);
 	 const myData = JSON.stringify(mySuggession.result);
 	
-	//console.log(myOptions);
 	return (
 		<>
 
 			<p {...useBlockProps()}>
 
 				<InspectorControls>
-					<PanelBody title="AutoComplete Ski Resort">
-						<TextControl label={__('AutoComplete Ski Resort')}
-							value={searchTerm}
-							onChange={(value) => setAttributes({ searchTerm: value })}
-						/>
-
-
-						<PanelRow>
-							<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", padding: "5px" }}>
-
-								{
-									myData ?
-										<p>{myData.replace(/[\[\]{}"\/]/g, '')}</p>
-										: ''
-								}
-
-								<br /> <br />
-								{/* Description: {JSON.stringify(mySuggession.description)} */}
-
-								{JSON.stringify(mySuggession.total)}
-							</div>
-						</PanelRow>
-					</PanelBody>
 					<PanelBody title="Search Ski Resort">
-
-						<TextControl label={__('Search Ski Resort')}
+						<TextControl 
+							label={__('Search Ski Resort')}
 							value={resortFind}
 							onChange={(value) => setAttributes({ resortFind: value })}
 						/>
@@ -152,32 +111,12 @@ export default function Edit({ attributes, setAttributes }) {
 									</p>
 									: ''}
 							</div>
-
 						</PanelRow>
-
 					</PanelBody>
 				</InspectorControls>
-				{/* <SearchControl
-					label="Search Resort"
-					value={searchTerm}
-					onChange={(value) => setSearchTerm(value)}
-					help="Type to search for a ski resort."
-				/> */}
-				<div style={{ "color": "black", "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", paddingLeft: "5px" }}>
-					{/* {JSON.stringify(mySuggession.result)} <br /><br /> */}
-					{/* Description: {JSON.stringify(mySuggession.description)}<br />
-					Lift Count: {JSON.stringify(mySuggession.lifts)}<br /> */}
-					{/* Lift Open: {JSON.stringify(mySuggession.lifts.open)} */}
-					{
-						myData ?
-							<p>{myData.replace(/[\[\]{}"\/]/g, '')} <br /></p>
-							: ''
-					}
-
-					
-				</div>
+								
 				<ComboboxControl
-					label="Search Resort final:"
+					label="Type here to autocomplete Ski-Resort:"
 					value={selectedOption}
 					// options={ options.map((item) => ({
 					// 	value: item.site_path,   // Use `site_path` as the value
@@ -191,18 +130,8 @@ export default function Edit({ attributes, setAttributes }) {
 					}
 					onFilterValueChange={(inputValue) => {
 						setSearch(inputValue); // Update search term when user types
-					}}
-					
-										
-				/>
-				<div>
-					{
-						options.map((item, index) => {
-							return <li key={index}>{item.name} - {item.site_path}</li>
-						})
-					}
-					
-					</div>
+					}}										
+				/>				
 			</p>
 		</>
 	);

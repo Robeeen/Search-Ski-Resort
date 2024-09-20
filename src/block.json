@@ -9,7 +9,21 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
-		"html": false
+		"align": true,
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true,
+			"heading": true,
+			"button": true
+		},
+		"typography": {
+			"fontSize": true,
+			"textAlign": true,
+			"lineHeight": true
+		}
+		
 	},
 	"attributes": {
         "searchTerm": {
