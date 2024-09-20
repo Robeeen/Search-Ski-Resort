@@ -19,7 +19,8 @@
             "type": "string"
         },
 		"selectedOption":{
-			"type": "string"
+			"type": "string",
+			"default": ""
 		}
 	},
 	"textdomain": "search-final",

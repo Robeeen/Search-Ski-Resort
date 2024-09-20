@@ -47,22 +47,24 @@ export default function Edit({ attributes, setAttributes }) {
 	const [ search, setSearch ] = useState('');
 
 	useEffect(() => {
-		if(search && search.length > 1){
-			setLoading(true);
+		if(search.length > 1){
 			apiFetch({ path: `/fnugg/v1/autocomplete?q=${search}` })
 			.then((response) => {
-				JSON.stringify(setOptions(response));
-				setLoading(false);
+				console.log('Api Response on search', response.result);
+				const formattedOption = Array.isArray(response.result)
+				? response.result.map((item) => ({
+					value: item.name,
+					label: item.name
+				}))
+				: [];
+				console.log('Formattted Option:', formattedOption);
+				setOptions(formattedOption);
 			})
-			.catch(() => {				
-				setLoading(false);
+			.catch(() => {	
+				setOptions([]);		
 			});
 		}
 	}, [search]);
-
-
-
-
 
 	// const autoCoplete = () => {		
 	// 	setLoading(true);
@@ -102,8 +104,8 @@ export default function Edit({ attributes, setAttributes }) {
 		}
 	}, [resortFind]);
 	 const myData = JSON.stringify(mySuggession.result);
-	 const myOptions = JSON.stringify(options.result);
 	
+	//console.log(myOptions);
 	return (
 		<>
 
@@ -177,16 +179,30 @@ export default function Edit({ attributes, setAttributes }) {
 				<ComboboxControl
 					label="Search Resort final:"
 					value={selectedOption}
-					// options={options.map((option) => ({
-					// 	value: option.name,
-					// 	label: option.name
-					// }))}
-					options={ myOptions["name"]
+					// options={ options.map((item) => ({
+					// 	value: item.site_path,   // Use `site_path` as the value
+					// 	label: item.name        // Use `name` as the label
+					//   }))}
+					options={options}
+					
+					onChange={(value) => {
+						console.log('Selected Option:', value);
+						setAttributes({selectedOption: value})}		
 					}
-					onChange={(value) => setAttributes({selectedOption: value})}
+					onFilterValueChange={(inputValue) => {
+						setSearch(inputValue); // Update search term when user types
+					}}
 					
 										
 				/>
+				<div>
+					{
+						options.map((item, index) => {
+							return <li key={index}>{item.name} - {item.site_path}</li>
+						})
+					}
+					
+					</div>
 			</p>
 		</>
 	);

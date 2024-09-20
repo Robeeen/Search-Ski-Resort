@@ -78,15 +78,19 @@ function Edit({
   const [options, setOptions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
   const [search, setSearch] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)('');
   (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
-    if (search && search.length > 1) {
-      setLoading(true);
+    if (search.length > 1) {
       _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
         path: `/fnugg/v1/autocomplete?q=${search}`
       }).then(response => {
-        JSON.stringify(setOptions(response));
-        setLoading(false);
+        console.log('Api Response on search', response.result);
+        const formattedOption = Array.isArray(response.result) ? response.result.map(item => ({
+          value: item.name,
+          label: item.name
+        })) : [];
+        console.log('Formattted Option:', formattedOption);
+        setOptions(formattedOption);
       }).catch(() => {
-        setLoading(false);
+        setOptions([]);
       });
     }
   }, [search]);
@@ -129,7 +133,8 @@ function Edit({
     }
   }, [resortFind]);
   const myData = JSON.stringify(mySuggession.result);
-  const myOptions = JSON.stringify(options.result);
+
+  //console.log(myOptions);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
       ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
@@ -191,14 +196,26 @@ function Edit({
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
         label: "Search Resort final:",
         value: selectedOption
-        // options={options.map((option) => ({
-        // 	value: option.name,
-        // 	label: option.name
-        // }))}
+        // options={ options.map((item) => ({
+        // 	value: item.site_path,   // Use `site_path` as the value
+        // 	label: item.name        // Use `name` as the label
+        //   }))}
         ,
-        options: myOptions["name"],
-        onChange: value => setAttributes({
-          selectedOption: value
+        options: options,
+        onChange: value => {
+          console.log('Selected Option:', value);
+          setAttributes({
+            selectedOption: value
+          });
+        },
+        onFilterValueChange: inputValue => {
+          setSearch(inputValue); // Update search term when user types
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        children: options.map((item, index) => {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("li", {
+            children: [item.name, " - ", item.site_path]
+          }, index);
         })
       })]
     })
@@ -355,7 +372,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string"}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

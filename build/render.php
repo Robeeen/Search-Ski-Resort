@@ -6,7 +6,7 @@
 <p <?php echo get_block_wrapper_attributes(); ?>>
 	
 	<?php
-	$searchName =  $attributes['searchTerm'];
+	$searchName =  $attributes['selectedOption'];
     if( ! empty($searchName)){
          echo 'Resort Name Searched: ' . esc_html( $searchName ); }
         ?>
