@@ -84,7 +84,6 @@ export default function Edit({ attributes, setAttributes }) {
 			fetchResortData()
 		}
 	}, [resortFind]);
-	 const myData = JSON.stringify(mySuggession.result);
 	
 	return (
 		<>
