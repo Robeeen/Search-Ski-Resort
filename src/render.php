@@ -7,7 +7,31 @@
 	
 	<?php
 	$searchName =  $attributes['selectedOption'];
-    if( ! empty($searchName)){
-         echo 'Resort Name Searched: ' . esc_html( $searchName ); }
+
+    $search = explode(" ", $searchName);
+        
+    $api_url = "http://devwp.local/wp-json/fnugg/v1/search?q=$search[0]";
+
+    $json_data = file_get_contents($api_url);     
+      
+    $response = json_decode($json_data);
+
+    echo "Resort ID: " . $response->{'_id'} . "<br />";
+    echo "Resort Name: " . $response->{'name'} . "<br />";
+    echo "Resort Description: " . $response->{'description'} . "<br />";
+    echo "Resort Type: " . $response->{'_type'} . "<br />";
+    echo "Lifts Count: " . $response->{'lifts'}->{'count'} . "<br />";
+   
+ 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         ?>
 </p>

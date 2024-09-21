@@ -132,7 +132,7 @@ function Edit({
                 padding: "5px"
               },
               children: mySuggession ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
-                children: ["Name: ", mySuggession.name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Description: ", mySuggession.description, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Lift Open: ", JSON.stringify(mySuggession.lifts)]
+                children: ["Name: ", mySuggession.name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Description: ", mySuggession.description, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Lift Open: ", JSON.stringify(mySuggession.lifts), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "ID: ", mySuggession._id, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Type: ", mySuggession._type]
               }) : ''
             })
           })]
@@ -155,6 +155,17 @@ function Edit({
         onFilterValueChange: inputValue => {
           setSearch(inputValue); // Update search term when user types
         }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        style: {
+          "height": "auto",
+          "width": "100%",
+          "backgroundColor": "#c2c2c2"
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+          src: "https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg",
+          alt: "none",
+          width: 620
+        })
       })]
     })
   });
@@ -310,7 +321,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true,"link":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true},"background":{"backgroundImage":true,"backgroundSize":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

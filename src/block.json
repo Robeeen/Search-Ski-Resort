@@ -16,14 +16,18 @@
 			"text": true,
 			"gradients": true,
 			"heading": true,
-			"button": true
+			"button": true,
+			"link": true
 		},
 		"typography": {
 			"fontSize": true,
 			"textAlign": true,
 			"lineHeight": true
-		}
-		
+		},
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true 
+		}		
 	},
 	"attributes": {
         "searchTerm": {

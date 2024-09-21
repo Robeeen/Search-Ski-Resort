@@ -60,12 +60,24 @@ class Fnugg_API {
 
         // Filter the data
         $filtered_data = [
+            '_index' => $data['hits']['hits'][0]['_index'] ?? 'not',
+            '_type' => $data['hits']['hits'][0]['_type'] ?? 'not',
+            '_id' => $data['hits']['hits'][0]['_id'] ?? 'not',
             'name' => $data['hits']['hits'][0]['_source']['name'] ?? 'not found',
             'description' => $data['hits']['hits'][0]['_source']['description'] ?? 'not found',
             'lifts' => [
                 'count' => $data['hits']['hits'][0]['_source']['lifts']['count'] ?? 0,
-                'open' => $data['hits']['hits'][0]['_source']['lifts']['open'] ?? 0,                
+                'open' => $data['hits']['hits'][0]['_source']['lifts']['open'] ?? 0,               
+            ],            
+            'contact' => [
+                'address' => $data['hits']['hits'][0]['_source']['contact']['address'] ?? 'not found',
+                'city' => $data['hits']['hits'][0]['_source']['contact']['city'] ?? 'not found',
+                'phone_servicecenter' => $data['hits']['hits'][0]['_source']['contact']['phone_servicecenter'] ?? 'not found',
             ],
+            'temperature' => [
+               'value' => $data['hits']['hits'][0]['_source']['conditions']['current_report']['top']['temperature']['value'] ?? 'not found',
+               'unit' => $data['hits']['hits'][0]['_source']['conditions']['current_report']['top']['temperature']['unit'] ?? 'not found',
+            ]
         ];
 
         // Cache the result

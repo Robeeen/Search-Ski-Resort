@@ -31,7 +31,7 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 
-import { PanelBody, TextControl, Button, SearchControl, PanelRow, ComboboxControl } from '@wordpress/components';
+import { PanelBody, TextControl, SearchControl, PanelRow, ComboboxControl } from '@wordpress/components';
 import { useState, useEffect } from 'react';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -102,8 +102,9 @@ export default function Edit({ attributes, setAttributes }) {
 								{mySuggession ?
 									<p>Name: {mySuggession.name}<br />
 									   Description: {mySuggession.description}<br />
-									   Lift Open: {JSON.stringify(mySuggession.lifts)}
-								
+									   Lift Open: {JSON.stringify(mySuggession.lifts)}	<br />
+									   ID: {mySuggession._id}	<br />
+									   Type: {mySuggession._type}						
 									</p>
 									: ''}
 							</div>
@@ -127,7 +128,10 @@ export default function Edit({ attributes, setAttributes }) {
 					onFilterValueChange={(inputValue) => {
 						setSearch(inputValue); // Update search term when user types
 					}}										
-				/>				
+				/>
+				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2",}}>
+					<img src='https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg' alt='none' width={620}/>
+					</div>				
 			</p>
 		</>
 	);
