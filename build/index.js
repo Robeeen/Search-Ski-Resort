@@ -159,7 +159,7 @@ function Edit({
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
           src: "https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg",
           alt: "none",
-          width: 620
+          width: 328
         })
       })]
     })

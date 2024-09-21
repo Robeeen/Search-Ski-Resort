@@ -125,7 +125,7 @@ export default function Edit({ attributes, setAttributes }) {
 					}}										
 				/>
 				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2",}}>
-					<img src='https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg' alt='none' width={620}/>
+					<img src='https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg' alt='none' width={328}/>
 					</div>				
 			</p>
 		</>

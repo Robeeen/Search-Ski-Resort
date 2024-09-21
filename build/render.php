@@ -22,7 +22,7 @@
     echo "Resort Type: " . $response->{'_type'} . "<br />";
     echo "Lifts Count: " . $response->{'lifts'}->{'count'} . "<br />";
    
- 
+    echo "Index: " . $response->{'_index'} . "<br />";
         
         
         
