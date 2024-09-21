@@ -115,12 +115,7 @@ export default function Edit({ attributes, setAttributes }) {
 				<ComboboxControl
 					label="Type here to autocomplete Ski-Resort:"
 					value={selectedOption}
-					// options={ options.map((item) => ({
-					// 	value: item.site_path,   // Use `site_path` as the value
-					// 	label: item.name        // Use `name` as the label
-					//   }))}
-					options={options}
-					
+					options={options}					
 					onChange={(value) => {
 						console.log('Selected Option:', value);
 						setAttributes({selectedOption: value})}		

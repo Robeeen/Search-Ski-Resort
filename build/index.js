@@ -139,12 +139,7 @@ function Edit({
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
         label: "Type here to autocomplete Ski-Resort:",
-        value: selectedOption
-        // options={ options.map((item) => ({
-        // 	value: item.site_path,   // Use `site_path` as the value
-        // 	label: item.name        // Use `name` as the label
-        //   }))}
-        ,
+        value: selectedOption,
         options: options,
         onChange: value => {
           console.log('Selected Option:', value);
