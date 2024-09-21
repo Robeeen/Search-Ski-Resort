@@ -58,29 +58,30 @@ class Fnugg_API {
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
 
-        $main = $data['hits']['hits'][0];
-
         // Filter the data
         $filtered_data = [
-            '_index' => $main['_index'] ?? 'not',
-            '_type' => $main['_type'] ?? 'not',
-            '_id' => $main['_id'] ?? 'not',
-            'name' => $main['_source']['name'] ?? 'not found',
-            'description' => $main['_source']['description'] ?? 'not found',
+            '_index' => $data['hits']['hits'][0]['_index'] ?? 'not',
+            '_type' => $data['hits']['hits'][0]['_type'] ?? 'not',
+            '_id' => $data['hits']['hits'][0]['_id'] ?? 'not',
+            'name' => $data['hits']['hits'][0]['_source']['name'] ?? 'not found',
+            'description' => $data['hits']['hits'][0]['_source']['description'] ?? 'not found',
             'lifts' => [
-                'count' => $main['_source']['lifts']['count'] ?? 0,
-                'open' => $main['_source']['lifts']['open'] ?? 0,               
+                'count' => $data['hits']['hits'][0]['_source']['lifts']['count'] ?? 0,
+                'open' => $data['hits']['hits'][0]['_source']['lifts']['open'] ?? 0,               
             ],            
             'contact' => [
-                'address' => $main['_source']['contact']['address'] ?? 'not found',
-                'city' => $main['_source']['contact']['city'] ?? 'not found',
+                'address' => $data['hits']['hits'][0]['_source']['contact']['address'] ?? 'not found',
+                'city' => $data['hits']['hits'][0]['_source']['contact']['city'] ?? 'not found',
                 'phone_servicecenter' => $data['hits']['hits'][0]['_source']['contact']['phone_servicecenter'] ?? 'not found',
             ],
             'temperature' => [
-               'value' => $main['_source']['conditions']['current_report']['top']['temperature']['value'] ?? 'not found',
-               'unit' => $main['_source']['conditions']['current_report']['top']['temperature']['unit'] ?? 'not found',
+               'value' => $data['hits']['hits'][0]['_source']['conditions']['current_report']['top']['temperature']['value'] ?? 'not found',
+               'unit' => $data['hits']['hits'][0]['_source']['conditions']['current_report']['top']['temperature']['unit'] ?? 'not found',
             ],
-            'symbol' => $main['_index']
+            'symbol' => [
+                'yr_id' => $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['yr_id'] ?? 'not found',
+                'name'=> $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['yr_id'] ?? 'not found',
+            ]
         ];
 
         // Cache the result

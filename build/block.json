@@ -39,6 +39,10 @@
     "selectedOption": {
       "type": "string",
       "default": ""
+    },
+    "selectedItems": {
+      "type": "array",
+      "default": []
     }
   },
   "textdomain": "search-final",

@@ -67,6 +67,7 @@ function Edit({
   setAttributes
 }) {
   const {
+    showResortFind,
     resortFind,
     selectedOption
   } = attributes;
@@ -117,24 +118,32 @@ function Edit({
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
           title: "Search Ski Resort",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Ski Resort'),
-            value: resortFind,
-            onChange: value => setAttributes({
-              resortFind: value
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+            checked: !!showResortFind,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Search Field'),
+            onChange: () => setAttributes({
+              showResortFind: !showResortFind
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              style: {
-                "height": "auto",
-                "width": "100%",
-                "backgroundColor": "#c2c2c2",
-                padding: "5px"
-              },
-              children: mySuggession ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
-                children: ["Name: ", mySuggession.name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Description: ", mySuggession.description, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Lift Open: ", JSON.stringify(mySuggession.lifts), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "ID: ", mySuggession._id, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Type: ", mySuggession._type]
-              }) : ''
-            })
+          }), showResortFind && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Ski Resort'),
+              value: resortFind,
+              onChange: value => setAttributes({
+                resortFind: value
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                style: {
+                  "height": "auto",
+                  "width": "100%",
+                  "backgroundColor": "#c2c2c2",
+                  padding: "5px"
+                },
+                children: mySuggession ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
+                  children: ["Name: ", mySuggession.name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Description: ", mySuggession.description, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Lift Open: ", JSON.stringify(mySuggession.lifts), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "ID: ", mySuggession._id, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Type: ", mySuggession._type]
+                }) : ''
+              })
+            })]
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
@@ -316,7 +325,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true,"link":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true},"background":{"backgroundImage":true,"backgroundSize":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true,"link":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true},"background":{"backgroundImage":true,"backgroundSize":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""},"selectedItems":{"type":"array","default":[]}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

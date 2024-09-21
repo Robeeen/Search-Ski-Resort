@@ -31,41 +31,41 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 
-import { PanelBody, TextControl, SearchControl, PanelRow, ComboboxControl } from '@wordpress/components';
+import { PanelBody, TextControl, ToggleControl, PanelRow, ComboboxControl } from '@wordpress/components';
 import { useState, useEffect } from 'react';
 import apiFetch from '@wordpress/api-fetch';
 
 
 export default function Edit({ attributes, setAttributes }) {
 
-	const { resortFind, selectedOption } = attributes;	
+	const { showResortFind, resortFind, selectedOption } = attributes;
 	const [loading, setLoading] = useState(false);
 
 	//For ComboBoxControl: Autocomplete - search
-	const [ options, setOptions ] = useState([]);
-	const [ search, setSearch ] = useState('');
+	const [options, setOptions] = useState([]);
+	const [search, setSearch] = useState('');
 
 	useEffect(() => {
-		if(search.length >= 2){
+		if (search.length >= 2) {
 			apiFetch({ path: `/fnugg/v1/autocomplete?q=${search}` })
-			.then((response) => {
-				console.log('Api Response on search', response.result);
-				const formattedOption = Array.isArray(response.result)
-				? response.result.map((item) => ({
-					value: item.name,
-					label: item.name
-				}))
-				: [];
-				console.log('Formattted Option:', formattedOption);
-				setOptions(formattedOption);
-			})
-			.catch(() => {	
-				setOptions([]);		
-			});
+				.then((response) => {
+					console.log('Api Response on search', response.result);
+					const formattedOption = Array.isArray(response.result)
+						? response.result.map((item) => ({
+							value: item.name,
+							label: item.name
+						}))
+						: [];
+					console.log('Formattted Option:', formattedOption);
+					setOptions(formattedOption);
+				})
+				.catch(() => {
+					setOptions([]);
+				});
 		}
 	}, [search]);
 
-	
+
 	//For TextControl: Search on Panel Row
 	const [mySuggession, setMySuggestions] = useState([]);
 	const fetchResortData = () => {
@@ -84,49 +84,62 @@ export default function Edit({ attributes, setAttributes }) {
 			fetchResortData()
 		}
 	}, [resortFind]);
-	
+
 	return (
 		<>
 			<p {...useBlockProps()}>
 
 				<InspectorControls>
 					<PanelBody title="Search Ski Resort">
-						<TextControl 
-							label={__('Search Ski Resort')}
-							value={resortFind}
-							onChange={(value) => setAttributes({ resortFind: value })}
+						<ToggleControl
+							checked={!!showResortFind}
+							label={__('Show Search Field')}
+							onChange={() =>
+								setAttributes({
+									showResortFind: !showResortFind,
+								})
+							}
 						/>
-
-						<PanelRow>
-							<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", padding: "5px" }}>
-								{mySuggession ?
-									<p>Name: {mySuggession.name}<br />
-									   Description: {mySuggession.description}<br />
-									   Lift Open: {JSON.stringify(mySuggession.lifts)}	<br />
-									   ID: {mySuggession._id}	<br />
-									   Type: {mySuggession._type}						
-									</p>
-									: ''}
-							</div>
-						</PanelRow>
+						{showResortFind && (
+							<>
+								<TextControl
+									label={__('Search Ski Resort')}
+									value={resortFind}
+									onChange={(value) => setAttributes({ resortFind: value })}
+								/>
+								<PanelRow>
+									<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", padding: "5px" }}>
+										{mySuggession ?
+											<p>Name: {mySuggession.name}<br />
+												Description: {mySuggession.description}<br />
+												Lift Open: {JSON.stringify(mySuggession.lifts)}	<br />
+												ID: {mySuggession._id}	<br />
+												Type: {mySuggession._type}
+											</p>
+											: ''}
+									</div>
+								</PanelRow>
+							</>
+						)}
 					</PanelBody>
 				</InspectorControls>
-								
+
 				<ComboboxControl
 					label="Type here to autocomplete Ski-Resort:"
 					value={selectedOption}
-					options={options}					
+					options={options}
 					onChange={(value) => {
 						console.log('Selected Option:', value);
-						setAttributes({selectedOption: value})}		
+						setAttributes({ selectedOption: value })
+					}
 					}
 					onFilterValueChange={(inputValue) => {
 						setSearch(inputValue); // Update search term when user types
-					}}										
+					}}
 				/>
-				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2",}}>
-					<img src='https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg' alt='none' width={328}/>
-					</div>				
+				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", }}>
+					<img src='https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg' alt='none' width={328} />
+				</div>
 			</p>
 		</>
 	);
