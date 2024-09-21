@@ -43,6 +43,9 @@
 		"selectedItems": {
 			"type" : "array",
 			"default" : []
+		},
+		"showResortFind": {
+			"type": "boolean"
 		}
 	},
 	"textdomain": "search-final",
