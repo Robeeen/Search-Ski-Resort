@@ -84,6 +84,7 @@ export default function Edit({ attributes, setAttributes }) {
 			fetchResortData()
 		}
 	}, [resortFind]);
+	console.log('my Sugges:', mySuggession);
 
 	return (
 		<>

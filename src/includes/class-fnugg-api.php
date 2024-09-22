@@ -53,11 +53,12 @@ class Fnugg_API {
         // }
 
         // Call Fnugg API
-        $source_fields = 'name,description,lifts.count,lifts.open';
+        //source_field must not have space before comma *********//
+        $source_fields = 'name,description,lifts.count,lifts.open,conditions.combined.top.symbol.yr_id,conditions.combined.top.symbol.name,images.image_1_1_l,contact.address,contact.zip_code,contact.call_number';
         $response = wp_remote_get($this->api_base . 'search?q=' . urlencode($query) . '&sourceFields=' . urlencode($source_fields));
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
-
+       
         // Filter the data
         $filtered_data = [
             '_index' => $data['hits']['hits'][0]['_index'] ?? 'not',
@@ -65,23 +66,23 @@ class Fnugg_API {
             '_id' => $data['hits']['hits'][0]['_id'] ?? 'not',
             'name' => $data['hits']['hits'][0]['_source']['name'] ?? 'not found',
             'description' => $data['hits']['hits'][0]['_source']['description'] ?? 'not found',
+            'contact' => [
+                'address' => $data['hits']['hits'][0]['_source']['contact']['address'] ?? 'not found',
+                'zip_code' => $data['hits']['hits'][0]['_source']['contact']['zip_code'] ?? 'not found',
+                'call_number' => $data['hits']['hits'][0]['_source']['contact']['call_number'] ?? 'not found',
+            ],            
             'lifts' => [
                 'count' => $data['hits']['hits'][0]['_source']['lifts']['count'] ?? 0,
                 'open' => $data['hits']['hits'][0]['_source']['lifts']['open'] ?? 0,               
-            ],            
-            'contact' => [
-                'address' => $data['hits']['hits'][0]['_source']['contact']['address'] ?? 'not found',
-                'city' => $data['hits']['hits'][0]['_source']['contact']['city'] ?? 'not found',
-                'phone_servicecenter' => $data['hits']['hits'][0]['_source']['contact']['phone_servicecenter'] ?? 'not found',
-            ],
-            'temperature' => [
-               'value' => $data['hits']['hits'][0]['_source']['conditions']['current_report']['top']['temperature']['value'] ?? 'not found',
-               'unit' => $data['hits']['hits'][0]['_source']['conditions']['current_report']['top']['temperature']['unit'] ?? 'not found',
-            ],
+            ], 
             'symbol' => [
-                'yr_id' => $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['yr_id'] ?? 'not found',
-                'name'=> $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['yr_id'] ?? 'not found',
-            ]
+                'yr_id' => $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['yr_id'] ?? 0,
+                'name' => $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['name'] ?? 0,
+            ], 
+            'images' => [
+                'images' => $data['hits']['hits'][0]['_source']['images']['image_1_1_l'] ?? 'not found',
+            ]       
+          
         ];
 
         // Cache the result

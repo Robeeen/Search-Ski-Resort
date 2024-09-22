@@ -21,8 +21,8 @@
     echo "Resort Description: " . $response->{'description'} . "<br />";
     echo "Resort Type: " . $response->{'_type'} . "<br />";
     echo "Lifts Count: " . $response->{'lifts'}->{'count'} . "<br />";
-    echo "Symbol-name: " . $response->{'symbol'}->{'name'} . "<br />";
-    echo "Symbol-id: " . $response->{'symbol'}->{'yr_id'} . "<br />";
+    // echo "Symbol-name: " . $response->{'symbol'}->{'name'} . "<br />";
+    // echo "Symbol-id: " . $response->{'symbol'}->{'yr_id'} . "<br />";
         
         
         
