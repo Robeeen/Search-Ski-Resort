@@ -15,17 +15,29 @@
     $json_data = file_get_contents($api_url);     
       
     $response = json_decode($json_data);
+ 
 
-    echo "Resort ID: " . $response->{'_id'} . "<br />";
-    echo "Resort Name: " . $response->{'name'} . "<br />";
-    echo "Resort Description: " . $response->{'description'} . "<br />";
-    echo "Resort Type: " . $response->{'_type'} . "<br />";
-    echo "Lifts Count: " . $response->{'lifts'}->{'count'} . "<br />";
-    echo "<img src=<?php echo plugin_dir_url( __FILE__ ) . 'image/symbols/" . $response->{'symbol'}->{"yr_id"} . ".svg" . "';?> >";
-    echo $response->{'symbol'}->{"name"} .  "<br />";
-    // echo "Symbol-name: " . $response->{'symbol'}->{'name'} . "<br />";
-    // echo "Symbol-id: " . $response->{'symbol'}->{'yr_id'} . "<br />";
-        
+    echo '<img src="' . $response->{'images'}->{"images"} . '" width="100%" height="100%">';
+    echo '<span style="margin-left: 10px;font-size: 20px; color: #87CEEB">' . $response->{'name'} . '</span><br />';
+    echo '<span style="margin-left: 10px">Address: ' . $response->{'contact'}->{'address'} . '</span><br />';
+    
+    //yecho "Resort Description: " . $response->{'description'} . "<br />";
+    echo '<span style="margin-left: 10px">Phone: +' . $response->{'contact'}->{'call_number'} . '</span><br />';
+    echo '<span style="margin-left: 10px">Lifts Count: ' . $response->{'lifts'}->{'count'} . '</span><br />';
+    echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/' . $response->{'symbol'}->{"yr_id"} . '.svg" style="margin-left: 10px">';
+
+    echo $response->{'symbol'}->{"name"} . '<span style="margin-left: 8px; font-size: 30px;color: #FFFF00">' .  $response->{'temperature'}->{"value"} . '&#176;</span>' .  "<br />";
+    echo '<div style="display:flex; posititon:relative; margin-top: -70px; margin-left: 280px;color: white;font-size: 16px; ">';
+    echo '<div>';
+        echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/path.svg' . '">';
+    echo '</div>';
+    echo '<div>';
+        echo "Sesongstart" . "<br />" . substr($response->{'resort_opening_date'}, 0, 10);
+    echo '</div>';
+
+    echo '</div>';
+
+
         
         
         

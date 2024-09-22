@@ -27,6 +27,10 @@
 		"background": {
 			"backgroundImage": true,
 			"backgroundSize": true 
+		}, 
+		"spacing": {
+			"padding": true,
+			"margin": true
 		}		
 	},
 	"attributes": {
@@ -46,6 +50,10 @@
 		},
 		"showResortFind": {
 			"type": "boolean"
+		},
+		"showAddr": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"textdomain": "search-final",
