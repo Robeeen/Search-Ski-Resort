@@ -58,6 +58,10 @@
     "showPhone": {
       "type": "boolean",
       "default": false
+    },
+    "showLift": {
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "search-final",
