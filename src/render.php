@@ -15,6 +15,9 @@
     $json_data = file_get_contents($api_url);     
       
     $response = json_decode($json_data);
+    if($attributes['showAddr']){
+        echo '<span>Hi-there</span>';
+    }
  
 
     echo '<img src="' . $response->{'images'}->{"images"} . '" width="100%" height="100%">';
