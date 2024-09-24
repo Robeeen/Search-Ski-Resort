@@ -92,7 +92,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 				<InspectorControls>
 					<PanelBody title="Search Ski Resort">
-						{/* <ToggleControl
+						<ToggleControl
 							checked={!!showAddr}
 							label={__('Show Address')}
 							onChange={() =>
@@ -101,7 +101,7 @@ export default function Edit({ attributes, setAttributes }) {
 								})
 							}
 							
-						/> */}
+						/>
 						<ToggleControl
 							checked={!!showResortFind}
 							label={__('Show Search Field')}
