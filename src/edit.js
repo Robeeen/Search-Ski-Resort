@@ -38,7 +38,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default function Edit({ attributes, setAttributes }) {
 
-	const { showResortFind, resortFind, selectedOption, showAddr } = attributes;
+	const { showResortFind, resortFind, selectedOption, showAddr, showPhone } = attributes;
 	const [loading, setLoading] = useState(false);
 
 	//For ComboBoxControl: Autocomplete - search
@@ -99,8 +99,16 @@ export default function Edit({ attributes, setAttributes }) {
 								setAttributes({
 									showAddr: !showAddr,
 								})
-							}
-							
+							}							
+						/>
+						<ToggleControl
+							checked={!!showPhone}
+							label={__('Show Phone')}
+							onChange={() =>
+								setAttributes({
+									showPhone: !showPhone,
+								})
+							}							
 						/>
 						<ToggleControl
 							checked={!!showResortFind}

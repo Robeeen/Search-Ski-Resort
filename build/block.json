@@ -54,6 +54,10 @@
     "showAddr": {
       "type": "boolean",
       "default": false
+    },
+    "showPhone": {
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "search-final",

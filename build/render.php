@@ -15,19 +15,20 @@
     $json_data = file_get_contents($api_url);     
       
     $response = json_decode($json_data);
-    if($attributes['showAddr']){
-        echo '<span>Hi-there</span>';
-    }
+    
  
 
     echo '<img src="' . $response->{'images'}->{"images"} . '" width="100%" height="100%">';
     echo '<span style="margin-left: 10px;font-size: 20px; color: #87CEEB">' . $response->{'name'} . '</span><br />';
-    echo '<span style="margin-left: 10px">Address: ' . $response->{'contact'}->{'address'} . '</span><br />';
+    if($attributes['showAddr']){
+        echo '<span style="margin-left: 10px">Address: ' . $response->{'contact'}->{'address'} . '</span><br />';
+    }
+    if($attributes['showPhone']){
+        echo '<span style="margin-left: 10px">Phone: +' . $response->{'contact'}->{'call_number'} . '</span><br />';
+    }
     
-    //yecho "Resort Description: " . $response->{'description'} . "<br />";
-    echo '<span style="margin-left: 10px">Phone: +' . $response->{'contact'}->{'call_number'} . '</span><br />';
     echo '<span style="margin-left: 10px">Lifts Count: ' . $response->{'lifts'}->{'count'} . '</span><br />';
-    echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/' . $response->{'symbol'}->{"yr_id"} . '.svg" style="margin-left: 10px">';
+    echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/' . $response->{'symbol'}->{"fnugg_id"} . '.svg" style="margin-left: 10px">';
 
     echo $response->{'symbol'}->{"name"} . '<span style="margin-left: 8px; font-size: 30px;color: #FFFF00">' .  $response->{'temperature'}->{"value"} . '&#176;</span>' .  "<br />";
     echo '<div style="display:flex; posititon:relative; margin-top: -70px; margin-left: 280px;color: white;font-size: 16px; ">';

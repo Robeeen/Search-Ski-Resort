@@ -54,7 +54,7 @@ class Fnugg_API {
 
         // Call Fnugg API
         //source_field must not have space before comma *********//
-        $source_fields = 'name,description,resort_opening_date,lifts.count,lifts.open,conditions.combined.top.symbol.yr_id,conditions.combined.top.symbol.name,images.image_1_1_l,contact.address,contact.zip_code,contact.call_number,conditions.combined.top.temperature.value';
+        $source_fields = 'name,description,resort_opening_date,lifts.count,lifts.open,conditions.combined.top.symbol.fnugg_id,conditions.combined.top.symbol.name,images.image_1_1_l,contact.address,contact.zip_code,contact.call_number,conditions.combined.top.temperature.value';
         $response = wp_remote_get($this->api_base . 'search?q=' . urlencode($query) . '&sourceFields=' . urlencode($source_fields));
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
@@ -77,7 +77,7 @@ class Fnugg_API {
                 'open' => $data['hits']['hits'][0]['_source']['lifts']['open'] ?? 0,               
             ], 
             'symbol' => [
-                'yr_id' => $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['yr_id'] ?? 0,
+                'fnugg_id' => $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['fnugg_id'] ?? 0,
                 'name' => $data['hits']['hits'][0]['_source']['conditions']['combined']['top']['symbol']['name'] ?? 0,
             ], 
             'images' => [
