@@ -30,9 +30,12 @@
         echo '<span style="margin-left: 10px">Lifts Count: ' . $response->{'lifts'}->{'count'} . '</span><br />';
     }
     
-    echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/' . $response->{'symbol'}->{"fnugg_id"} . '.svg" style="margin-left: 10px">';
-
-    echo $response->{'symbol'}->{"name"} . '<span style="margin-left: 8px; font-size: 30px;color: #FFFF00">' .  $response->{'temperature'}->{"value"} . '&#176;</span>' .  "<br />";
+    
+    if($attributes['showTemp']){
+        echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/' . $response->{'symbol'}->{"fnugg_id"} . '.svg" style="margin-left: 10px">';
+        echo $response->{'symbol'}->{"name"} . '<span style="margin-left: 8px; font-size: 30px;color: #FFFF00">' .  $response->{'temperature'}->{"value"} . '&#176;</span>' .  "<br />";
+    }
+    
     echo '<div style="display:flex; posititon:relative; margin-top: -70px; margin-left: 280px;color: white;font-size: 16px; ">';
     echo '<div>';
         echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/path.svg' . '">';

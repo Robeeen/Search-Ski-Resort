@@ -38,7 +38,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default function Edit({ attributes, setAttributes }) {
 
-	const { showResortFind, resortFind, selectedOption, showAddr, showPhone, showLift } = attributes;
+	const { showResortFind, resortFind, selectedOption, showAddr, showPhone, showLift, showTemp } = attributes;
 	const [loading, setLoading] = useState(false);
 
 	//For ComboBoxControl: Autocomplete - search
@@ -91,7 +91,7 @@ export default function Edit({ attributes, setAttributes }) {
 			<p {...useBlockProps()}>
 
 				<InspectorControls>
-					<PanelBody title="Search Ski Resort">
+					<PanelBody title="Enable to Display">
 						<ToggleControl
 							checked={!!showAddr}
 							label={__('Show Address')}
@@ -118,6 +118,15 @@ export default function Edit({ attributes, setAttributes }) {
 									showLift: !showLift,
 								})
 							}							
+						/>
+						<ToggleControl
+							checked={!!showTemp}
+							label={__('Show Temparature')}
+							onChange={() =>
+								setAttributes({
+									showTemp: !showTemp,
+								})
+							}
 						/>
 						<ToggleControl
 							checked={!!showResortFind}

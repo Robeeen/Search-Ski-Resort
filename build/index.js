@@ -72,7 +72,8 @@ function Edit({
     selectedOption,
     showAddr,
     showPhone,
-    showLift
+    showLift,
+    showTemp
   } = attributes;
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(false);
 
@@ -122,7 +123,7 @@ function Edit({
       ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-          title: "Search Ski Resort",
+          title: "Enable to Display",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
             checked: !!showAddr,
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Address'),
@@ -140,6 +141,12 @@ function Edit({
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Lift count'),
             onChange: () => setAttributes({
               showLift: !showLift
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+            checked: !!showTemp,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Temparature'),
+            onChange: () => setAttributes({
+              showTemp: !showTemp
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
             checked: !!showResortFind,
@@ -348,7 +355,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true,"link":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true},"background":{"backgroundImage":true,"backgroundSize":true},"spacing":{"padding":true,"margin":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""},"selectedItems":{"type":"array","default":[]},"showResortFind":{"type":"boolean"},"showAddr":{"type":"boolean","default":false},"showPhone":{"type":"boolean","default":false},"showLift":{"type":"boolean","default":false}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true,"link":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true},"background":{"backgroundImage":true,"backgroundSize":true},"spacing":{"padding":true,"margin":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""},"selectedItems":{"type":"array","default":[]},"showResortFind":{"type":"boolean"},"showAddr":{"type":"boolean","default":false},"showPhone":{"type":"boolean","default":false},"showLift":{"type":"boolean","default":false},"showTemp":{"type":"boolean","default":false}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

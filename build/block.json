@@ -62,6 +62,10 @@
     "showLift": {
       "type": "boolean",
       "default": false
+    },
+    "showTemp": {
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "search-final",
