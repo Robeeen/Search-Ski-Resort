@@ -97,6 +97,8 @@ function Edit({
       });
     }
   }, [search]);
+
+  //To display the image of the Resort underneath Autocomplete Combobox at Editor page.
   const [mySuggession, setMySuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
     if (search.length >= 2) {

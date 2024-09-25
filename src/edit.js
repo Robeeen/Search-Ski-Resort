@@ -65,6 +65,7 @@ export default function Edit({ attributes, setAttributes }) {
 		}
 	}, [search]);
 
+	//To display the image of the Resort underneath Autocomplete Combobox at Editor page.
 	const [mySuggession, setMySuggestions] = useState([]);
 	useEffect(() => {
 		if (search.length >= 2) {
@@ -187,9 +188,7 @@ export default function Edit({ attributes, setAttributes }) {
 						setSearch(inputValue); // Update search term when user types
 					}}
 				/>
-				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", }}>
-
-					
+				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", }}>					
 					<img src={mySuggession && mySuggession.images } alt='none' width={320} />
 				</div>
 			</p>
