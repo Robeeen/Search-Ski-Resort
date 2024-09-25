@@ -72,6 +72,7 @@ export default function Edit({ attributes, setAttributes }) {
 			apiFetch({ path: `/fnugg/v1/search?q=${search}` })
 				.then((response) => {
 					setMySuggestions(response.images);
+					setAttributes(search);
 				})
 				.catch(() => {
 					setMySuggestions([]);
@@ -98,8 +99,8 @@ export default function Edit({ attributes, setAttributes }) {
 	// 		fetchResortData()
 	// 	}
 	// }, [resortFind]);
-	console.log('my Sugges:', mySuggession);
-	console.log('Address:', showAddr);
+
+	console.log('my Sugges:', mySuggession)
 	return (
 		<>
 			<p {...useBlockProps()}>
@@ -189,7 +190,7 @@ export default function Edit({ attributes, setAttributes }) {
 					}}
 				/>
 				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", }}>					
-					<img src={mySuggession && mySuggession.images } alt='none' width={320} />
+					<img src={mySuggession && mySuggession.images }  alt='none' width={320} />
 				</div>
 			</p>
 		</>
