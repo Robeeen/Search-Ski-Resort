@@ -65,25 +65,38 @@ export default function Edit({ attributes, setAttributes }) {
 		}
 	}, [search]);
 
+	const [mySuggession, setMySuggestions] = useState([]);
+	useEffect(() => {
+		if (search.length >= 2) {
+			apiFetch({ path: `/fnugg/v1/search?q=${search}` })
+				.then((response) => {
+					setMySuggestions(response.images);
+				})
+				.catch(() => {
+					setMySuggestions([]);
+				});
+			}
+	}, [search]);
+
 
 	//For TextControl: Search on Panel Row
-	const [mySuggession, setMySuggestions] = useState([]);
-	const fetchResortData = () => {
-		setLoading(true);
-		apiFetch({ path: `/fnugg/v1/search?q=${resortFind}` })
-			.then((data) => {
-				JSON.stringify(setMySuggestions(data));
-				setLoading(false);
-			})
-			.catch(() => {
-				setLoading(false);
-			});
-	};
-	useEffect(() => {
-		if (resortFind && resortFind.length > 0) {
-			fetchResortData()
-		}
-	}, [resortFind]);
+	
+	// const fetchResortData = () => {
+	// 	setLoading(true);
+	// 	apiFetch({ path: `/fnugg/v1/search?q=${resortFind}` })
+	// 		.then((data) => {
+	// 			JSON.stringify(setMySuggestions(data));
+	// 			setLoading(false);
+	// 		})
+	// 		.catch(() => {
+	// 			setLoading(false);
+	// 		});
+	// };
+	// useEffect(() => {
+	// 	if (resortFind && resortFind.length > 0) {
+	// 		fetchResortData()
+	// 	}
+	// }, [resortFind]);
 	console.log('my Sugges:', mySuggession);
 	console.log('Address:', showAddr);
 	return (
@@ -174,10 +187,11 @@ export default function Edit({ attributes, setAttributes }) {
 						setSearch(inputValue); // Update search term when user types
 					}}
 				/>
-				{/* <div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", }}>
+				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", }}>
+
 					
-					<img src='{https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg}' alt='none' width={320} />
-				</div> */}
+					<img src={mySuggession && mySuggession.images } alt='none' width={320} />
+				</div>
 			</p>
 		</>
 	);

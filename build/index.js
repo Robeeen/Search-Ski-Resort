@@ -97,25 +97,37 @@ function Edit({
       });
     }
   }, [search]);
+  const [mySuggession, setMySuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
+  (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+    if (search.length >= 2) {
+      _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+        path: `/fnugg/v1/search?q=${search}`
+      }).then(response => {
+        setMySuggestions(response.images);
+      }).catch(() => {
+        setMySuggestions([]);
+      });
+    }
+  }, [search]);
 
   //For TextControl: Search on Panel Row
-  const [mySuggession, setMySuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
-  const fetchResortData = () => {
-    setLoading(true);
-    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
-      path: `/fnugg/v1/search?q=${resortFind}`
-    }).then(data => {
-      JSON.stringify(setMySuggestions(data));
-      setLoading(false);
-    }).catch(() => {
-      setLoading(false);
-    });
-  };
-  (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
-    if (resortFind && resortFind.length > 0) {
-      fetchResortData();
-    }
-  }, [resortFind]);
+
+  // const fetchResortData = () => {
+  // 	setLoading(true);
+  // 	apiFetch({ path: `/fnugg/v1/search?q=${resortFind}` })
+  // 		.then((data) => {
+  // 			JSON.stringify(setMySuggestions(data));
+  // 			setLoading(false);
+  // 		})
+  // 		.catch(() => {
+  // 			setLoading(false);
+  // 		});
+  // };
+  // useEffect(() => {
+  // 	if (resortFind && resortFind.length > 0) {
+  // 		fetchResortData()
+  // 	}
+  // }, [resortFind]);
   console.log('my Sugges:', mySuggession);
   console.log('Address:', showAddr);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
@@ -189,6 +201,17 @@ function Edit({
         onFilterValueChange: inputValue => {
           setSearch(inputValue); // Update search term when user types
         }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        style: {
+          "height": "auto",
+          "width": "100%",
+          "backgroundColor": "#c2c2c2"
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+          src: mySuggession && mySuggession.images,
+          alt: "none",
+          width: 320
+        })
       })]
     })
   });
