@@ -10,4 +10,8 @@
   border: 1px dotted #f00;
 }
 
+.components-form-token-field__suggestion {
+  color: #fff !important;
+}
+
 /*# sourceMappingURL=index.css.map*/
