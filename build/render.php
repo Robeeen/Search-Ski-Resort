@@ -30,7 +30,6 @@
         echo '<span style="margin-left: 10px">Lifts Count: ' . $response->{'lifts'}->{'count'} . '</span><br />';
     }
     
-    
     if($attributes['showTemp']){
         echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/' . $response->{'symbol'}->{"fnugg_id"} . '.svg" style="margin-left: 10px">';
         echo $response->{'symbol'}->{"name"} . '<span style="margin-left: 8px; font-size: 30px;color: #FFFF00">' .  $response->{'temperature'}->{"value"} . '&#176;</span>' .  "<br />";
@@ -43,11 +42,7 @@
     echo '<div>';
         echo "Sesongstart" . "<br />" . substr($response->{'resort_opening_date'}, 0, 10);
     echo '</div>';
-
-    echo '</div>';
-
-
-        
+    echo '</div>';        
         
         
         

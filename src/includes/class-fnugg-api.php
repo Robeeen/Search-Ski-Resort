@@ -2,7 +2,7 @@
 
 class Fnugg_API {
     private $api_base = 'https://api.fnugg.no/';
-    //private $cache_time = 3600; // Cache for 1 hour
+    private $cache_time = 3600; // Cache for 1 hour
 
     public function __construct() {
         add_action('rest_api_init', function () {
@@ -24,11 +24,11 @@ class Fnugg_API {
         $query = sanitize_text_field($request->get_param('q'));
 
         // Check cache
-        // $cache_key = 'fnugg_autocomplete_' . md5($query);
-        // $cached_result = get_transient($cache_key);
-        // if ($cached_result) {
-        //     return rest_ensure_response($cached_result);
-        // }
+        $cache_key = 'fnugg_autocomplete_' . md5($query);
+        $cached_result = get_transient($cache_key);
+        if ($cached_result) {
+            return rest_ensure_response($cached_result);
+        }
 
         // Call Fnugg API
         $response = wp_remote_get($this->api_base . 'suggest/autocomplete/?q=' . urlencode($query));
@@ -36,7 +36,7 @@ class Fnugg_API {
         $data = json_decode($body, true);
 
         // Cache the result
-        //set_transient($cache_key, $data, $this->cache_time);
+        set_transient($cache_key, $data, $this->cache_time);
 
         return rest_ensure_response($data);
         
@@ -46,11 +46,11 @@ class Fnugg_API {
         $query = sanitize_text_field($request->get_param('q'));
 
         // Check cache
-        // $cache_key = 'fnugg_search_' . md5($query);
-        // $cached_result = get_transient($cache_key);
-        // if ($cached_result) {
-        //     return rest_ensure_response($cached_result);
-        // }
+        $cache_key = 'fnugg_search_' . md5($query);
+        $cached_result = get_transient($cache_key);
+        if ($cached_result) {
+            return rest_ensure_response($cached_result);
+        }
 
         // Call Fnugg API
         //source_field must not have space before comma *********//
@@ -90,7 +90,7 @@ class Fnugg_API {
         ];
 
         // Cache the result
-       // set_transient($cache_key, $filtered_data, $this->cache_time);
+        set_transient($cache_key, $filtered_data, $this->cache_time);
 
         return rest_ensure_response($filtered_data);
     }
