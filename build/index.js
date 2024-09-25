@@ -189,17 +189,6 @@ function Edit({
         onFilterValueChange: inputValue => {
           setSearch(inputValue); // Update search term when user types
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        style: {
-          "height": "auto",
-          "width": "100%",
-          "backgroundColor": "#c2c2c2"
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-          src: "https://fnugg.no/app/uploads/sites/89/2024/01/IMG_7270.jpeg",
-          alt: "none",
-          width: 328
-        })
       })]
     })
   });
