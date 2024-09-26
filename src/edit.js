@@ -190,7 +190,7 @@ export default function Edit({ attributes, setAttributes }) {
 					}}
 				/>
 				<div className="image_box">	
-					{imgUrl ? <img src={imgUrl }  alt='none' width={320} />
+					{imgUrl ? <img src={imgUrl }  alt='Type and image will load...' width={320} />
 					: <MediaPlaceholder 
 								onSelect={(media) => setAttributes({imgUrl: media.url})}
 								allowedTypes={['image']}	

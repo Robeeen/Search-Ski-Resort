@@ -199,7 +199,7 @@ function Edit({
         className: "image_box",
         children: imgUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
           src: imgUrl,
-          alt: "none",
+          alt: "Type and image will load...",
           width: 320
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaPlaceholder, {
           onSelect: media => setAttributes({
