@@ -66,6 +66,10 @@
     "showTemp": {
       "type": "boolean",
       "default": false
+    },
+    "imgUrl": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "search-final",

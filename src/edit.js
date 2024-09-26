@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, MediaPlaceholder } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -38,7 +38,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default function Edit({ attributes, setAttributes }) {
 
-	const { showResortFind, resortFind, selectedOption, showAddr, showPhone, showLift, showTemp } = attributes;
+	const { showResortFind, resortFind, selectedOption, showAddr, showPhone, showLift, showTemp, imgUrl } = attributes;
 	const [loading, setLoading] = useState(false);
 
 	//For ComboBoxControl: Autocomplete - search
@@ -66,21 +66,21 @@ export default function Edit({ attributes, setAttributes }) {
 	}, [search]);
 
 	//To display the image of the Resort underneath Autocomplete Combobox at Editor page.
-	const [mySuggession, setMySuggestions] = useState([]);
+	//const [mySuggession, setMySuggestions] = useState([]);
 	useEffect(() => {
 		if (search.length >= 2) {
 			apiFetch({ path: `/fnugg/v1/search?q=${search}` })
 				.then((response) => {
-					setMySuggestions(response.images);
-					setAttributes(search);
+					//setMySuggestions(response.images);
+					setAttributes({imgUrl: response.images.images});
 				})
 				.catch(() => {
-					setMySuggestions([]);
+					console.error('Error fetching image URL:', error);
 				});
 			}
-	}, [search]);
+	},[search]);
 
-
+	
 	//For TextControl: Search on Panel Row
 	
 	// const fetchResortData = () => {
@@ -100,7 +100,7 @@ export default function Edit({ attributes, setAttributes }) {
 	// 	}
 	// }, [resortFind]);
 
-	console.log('my Sugges:', mySuggession)
+	//console.log('my Sugges:', mySuggession)
 	return (
 		<>
 			<p {...useBlockProps()}>
@@ -159,7 +159,7 @@ export default function Edit({ attributes, setAttributes }) {
 									value={resortFind}
 									onChange={(value) => setAttributes({ resortFind: value })}
 								/>
-								<PanelRow>
+								{/* <PanelRow>
 									<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", padding: "5px" }}>
 										{mySuggession ?
 											<p>Name: {mySuggession.name}<br />
@@ -170,7 +170,7 @@ export default function Edit({ attributes, setAttributes }) {
 											</p>
 											: ''}
 									</div>
-								</PanelRow>
+								</PanelRow> */}
 							</>
 						)}
 					</PanelBody>
@@ -189,8 +189,14 @@ export default function Edit({ attributes, setAttributes }) {
 						setSearch(inputValue); // Update search term when user types
 					}}
 				/>
-				<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", }}>					
-					<img src={mySuggession && mySuggession.images }  alt='none' width={320} />
+				<div className="image_box">	
+					{imgUrl ? <img src={imgUrl }  alt='none' width={320} />
+					: <MediaPlaceholder 
+								onSelect={(media) => setAttributes({imgUrl: media.url})}
+								allowedTypes={['image']}	
+					
+					/>
+				}
 				</div>
 			</p>
 		</>

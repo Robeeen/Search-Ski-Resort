@@ -73,7 +73,8 @@ function Edit({
     showAddr,
     showPhone,
     showLift,
-    showTemp
+    showTemp,
+    imgUrl
   } = attributes;
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(false);
 
@@ -99,16 +100,18 @@ function Edit({
   }, [search]);
 
   //To display the image of the Resort underneath Autocomplete Combobox at Editor page.
-  const [mySuggession, setMySuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
+  //const [mySuggession, setMySuggestions] = useState([]);
   (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
     if (search.length >= 2) {
       _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
         path: `/fnugg/v1/search?q=${search}`
       }).then(response => {
-        setMySuggestions(response.images);
-        setAttributes(search);
+        //setMySuggestions(response.images);
+        setAttributes({
+          imgUrl: response.images.images
+        });
       }).catch(() => {
-        setMySuggestions([]);
+        console.error('Error fetching image URL:', error);
       });
     }
   }, [search]);
@@ -132,7 +135,7 @@ function Edit({
   // 	}
   // }, [resortFind]);
 
-  console.log('my Sugges:', mySuggession);
+  //console.log('my Sugges:', mySuggession)
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
       ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
@@ -169,26 +172,14 @@ function Edit({
             onChange: () => setAttributes({
               showResortFind: !showResortFind
             })
-          }), showResortFind && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          }), showResortFind && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
               label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Ski Resort'),
               value: resortFind,
               onChange: value => setAttributes({
                 resortFind: value
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                style: {
-                  "height": "auto",
-                  "width": "100%",
-                  "backgroundColor": "#c2c2c2",
-                  padding: "5px"
-                },
-                children: mySuggession ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
-                  children: ["Name: ", mySuggession.name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Description: ", mySuggession.description, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Lift Open: ", JSON.stringify(mySuggession.lifts), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "ID: ", mySuggession._id, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Type: ", mySuggession._type]
-                }) : ''
-              })
-            })]
+            })
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
@@ -205,15 +196,16 @@ function Edit({
           setSearch(inputValue); // Update search term when user types
         }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        style: {
-          "height": "auto",
-          "width": "100%",
-          "backgroundColor": "#c2c2c2"
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-          src: mySuggession && mySuggession.images,
+        className: "image_box",
+        children: imgUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+          src: imgUrl,
           alt: "none",
           width: 320
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaPlaceholder, {
+          onSelect: media => setAttributes({
+            imgUrl: media.url
+          }),
+          allowedTypes: ['image']
         })
       })]
     })
@@ -370,7 +362,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true,"link":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true},"background":{"backgroundImage":true,"backgroundSize":true},"spacing":{"padding":true,"margin":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""},"selectedItems":{"type":"array","default":[]},"showResortFind":{"type":"boolean"},"showAddr":{"type":"boolean","default":false},"showPhone":{"type":"boolean","default":false},"showLift":{"type":"boolean","default":false},"showTemp":{"type":"boolean","default":false}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/search-final","version":"0.1.0","title":"Search Final","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"align":true,"html":false,"color":{"background":true,"text":true,"gradients":true,"heading":true,"button":true,"link":true},"typography":{"fontSize":true,"textAlign":true,"lineHeight":true},"background":{"backgroundImage":true,"backgroundSize":true},"spacing":{"padding":true,"margin":true}},"attributes":{"searchTerm":{"type":"string"},"resortFind":{"type":"string"},"selectedOption":{"type":"string","default":""},"selectedItems":{"type":"array","default":[]},"showResortFind":{"type":"boolean"},"showAddr":{"type":"boolean","default":false},"showPhone":{"type":"boolean","default":false},"showLift":{"type":"boolean","default":false},"showTemp":{"type":"boolean","default":false},"imgUrl":{"type":"string","default":""}},"textdomain":"search-final","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

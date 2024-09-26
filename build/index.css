@@ -14,4 +14,10 @@
   color: #fff !important;
 }
 
+.image_box {
+  height: auto;
+  width: 100%;
+  background-color: #c2c2c2;
+}
+
 /*# sourceMappingURL=index.css.map*/
