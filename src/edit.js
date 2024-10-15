@@ -38,7 +38,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default function Edit({ attributes, setAttributes }) {
 
-	const { showResortFind, resortFind, selectedOption, showAddr, showPhone, showLift, showTemp, imgUrl } = attributes;
+	const { showResortFind, resortFind, selectedOption, showAddr, showPhone, showLift, showTemp, imgUrl, name } = attributes;
 	const [loading, setLoading] = useState(false);
 
 	//For ComboBoxControl: Autocomplete - search
@@ -66,12 +66,11 @@ export default function Edit({ attributes, setAttributes }) {
 	}, [search]);
 
 	//To display the image of the Resort underneath Autocomplete Combobox at Editor page.
-	//const [mySuggession, setMySuggestions] = useState([]);
+	
 	useEffect(() => {
 		if (search.length >= 2) {
 			apiFetch({ path: `/fnugg/v1/search?q=${search}` })
-				.then((response) => {
-					//setMySuggestions(response.images);
+				.then((response) => {					
 					setAttributes({imgUrl: response.images.images});
 				})
 				.catch(() => {
@@ -82,23 +81,23 @@ export default function Edit({ attributes, setAttributes }) {
 
 	
 	//For TextControl: Search on Panel Row
-	
-	// const fetchResortData = () => {
-	// 	setLoading(true);
-	// 	apiFetch({ path: `/fnugg/v1/search?q=${resortFind}` })
-	// 		.then((data) => {
-	// 			JSON.stringify(setMySuggestions(data));
-	// 			setLoading(false);
-	// 		})
-	// 		.catch(() => {
-	// 			setLoading(false);
-	// 		});
-	// };
-	// useEffect(() => {
-	// 	if (resortFind && resortFind.length > 0) {
-	// 		fetchResortData()
-	// 	}
-	// }, [resortFind]);
+	const [mySuggession, setMySuggestions] = useState([]);
+	const fetchResortData = () => {
+		setLoading(true);
+		apiFetch({ path: `/fnugg/v1/search?q=${resortFind}` })
+			.then((data) => {
+				JSON.stringify(setMySuggestions(data));
+				setLoading(false);
+			})
+			.catch(() => {
+				setLoading(false);
+			});
+	};
+	useEffect(() => {
+		if (resortFind && resortFind.length > 0) {
+			fetchResortData()
+		}
+	}, [resortFind]);
 
 	//console.log('my Sugges:', mySuggession)
 	return (
@@ -159,7 +158,7 @@ export default function Edit({ attributes, setAttributes }) {
 									value={resortFind}
 									onChange={(value) => setAttributes({ resortFind: value })}
 								/>
-								{/* <PanelRow>
+								<PanelRow>
 									<div style={{ "height": "auto", "width": "100%", "backgroundColor": "#c2c2c2", padding: "5px" }}>
 										{mySuggession ?
 											<p>Name: {mySuggession.name}<br />
@@ -170,7 +169,7 @@ export default function Edit({ attributes, setAttributes }) {
 											</p>
 											: ''}
 									</div>
-								</PanelRow> */}
+								</PanelRow>
 							</>
 						)}
 					</PanelBody>
@@ -186,17 +185,16 @@ export default function Edit({ attributes, setAttributes }) {
 					}
 					}
 					onFilterValueChange={(inputValue) => {
-						setSearch(inputValue); // Update search term when user types
+						setSearch(inputValue); // Update search term when user types in Input field
 					}}
 				/>
 				<div className="image_box">	
-					{imgUrl ? <img src={imgUrl }  alt='Type and image will load...' width={320} />
+					{imgUrl ? <img src={ imgUrl }  alt='Type and image will load...' width={326} height={326}/>
 					: <MediaPlaceholder 
 								onSelect={(media) => setAttributes({imgUrl: media.url})}
-								allowedTypes={['image']}	
-					
+								allowedTypes={['image']}						
 					/>
-				}
+					}					
 				</div>
 			</p>
 		</>

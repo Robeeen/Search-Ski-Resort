@@ -47,6 +47,7 @@ class Fnugg_API {
 
         // Check cache
         $cache_key = 'fnugg_search_' . md5($query);
+        
         $cached_result = get_transient($cache_key);
         if ($cached_result) {
             return rest_ensure_response($cached_result);

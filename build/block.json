@@ -3,10 +3,10 @@
   "apiVersion": 3,
   "name": "create-block/search-final",
   "version": "0.1.0",
-  "title": "Search Final",
+  "title": "Search Ski Resort",
   "category": "widgets",
   "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Ski Search Block Plugin",
   "example": {},
   "supports": {
     "align": true,
@@ -68,6 +68,10 @@
       "default": false
     },
     "imgUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
       "type": "string",
       "default": ""
     }

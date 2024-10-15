@@ -35,7 +35,7 @@
         echo '<span style="margin-left: 5px; padding-bottom: 5px">' . $response->{'symbol'}->{"name"} . '</span>' . '<span style="margin-left: 8px; font-size: 30px;color: #FFFF00">' .  $response->{'temperature'}->{"value"} . '&#176;</span>' .  "<br />";
     }
     
-    echo '<div style="display:flex; posititon:relative; margin-top: -70px; margin-left: 280px;color: white;font-size: 16px; ">';
+    echo '<div style="display:flex; posititon:relative; margin-top: -60px; margin-left: 252px;color: white;font-size: 16px; ">';
     echo '<div>';
         echo '<img src="' . plugin_dir_url( __DIR__ ) . 'src/image/symbols/path.svg' . '">';
     echo '</div>';
